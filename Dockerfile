@@ -1,0 +1,12 @@
+FROM ghcr.io/mdw-nl/datavalgen:latest
+
+# default model and factory
+ENV DATAVALGEN_MODEL=example
+ENV DATAVALGEN_FACTORY=example
+
+COPY ./src /app/datavalgen-model-example/src
+COPY ./pyproject.toml /app/datavalgen-model-example/pyproject.toml
+
+# install example data model package, where already-installed datavalgen can
+# find models and factories via python entry-points
+RUN pip install --no-cache-dir /app/datavalgen-model-example
