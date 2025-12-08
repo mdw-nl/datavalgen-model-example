@@ -26,7 +26,7 @@ You can validate with something like:
 $ docker run \
   --network none --rm --read-only --cap-drop=ALL --security-opt no-new-privileges=true --log-driver=none --user $(id -u):$(id -g) \
   -v ./data/tiny.csv:/data.csv:ro \
-  ghcr.io/mdw-nl/datavalgen-model-example:v0.1.0
+  ghcr.io/mdw-nl/datavalgen-model-example:v0.1.0 \
   validate
 ✅ No validation errors found.
 ```
@@ -46,7 +46,7 @@ If there are errors, you will see output like this:
 $ docker run \
   --network none --rm --read-only --cap-drop=ALL --security-opt no-new-privileges=true --log-driver=none --user $(id -u):$(id -g) \
   -v ./data/tiny.csv:/data.csv:ro \
-  ghcr.io/mdw-nl/datavalgen-model-example:v0.1.0
+  ghcr.io/mdw-nl/datavalgen-model-example:v0.1.0 \
   validate
 ❌ Line 2, column 'age': Input should be less than or equal to 120.
    Got: '550'.
