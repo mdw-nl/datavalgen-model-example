@@ -1,11 +1,11 @@
 [project]
 name = "datavalgen-model-example"
-version = "0.1.0"
+version = "0.1.1"
 description = "Example of a data model and factory to use with datavalgen."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "datavalgen>=0.1.0"
+    "datavalgen>=0.1.1"
 ]
 
 [build-system]
