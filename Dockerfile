@@ -1,4 +1,4 @@
-FROM ghcr.io/mdw-nl/datavalgen:v0.2.0
+FROM ghcr.io/mdw-nl/datavalgen:v0.2.2
 
 # default model and factory
 ENV DATAVALGEN_MODEL=example
