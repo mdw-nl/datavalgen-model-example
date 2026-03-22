@@ -6,6 +6,7 @@ ENV DATAVALGEN_FACTORY=example
 
 COPY ./src /app/datavalgen-model-example/src
 COPY ./pyproject.toml /app/datavalgen-model-example/pyproject.toml
+COPY ./README.md /app/datavalgen-model-example/README.md
 
 # install example data model package, where already-installed datavalgen can
 # find models and factories via python entry-points
