@@ -1,5 +1,5 @@
 from datetime import date
-from typing import Literal
+from typing import Annotated, Literal
 
 from pydantic import BaseModel, Field, model_validator
 
@@ -8,24 +8,77 @@ from pydantic import BaseModel, Field, model_validator
 # same pieces without repeating field definitions and make it easier to validate
 # meaningful subsets of the full data model.
 class IdentityAdminModel(BaseModel):
-    id: int = Field(..., gt=0)
-    name: str = Field(..., min_length=1, max_length=25)
-    site_code: Literal["SITE_A", "SITE_B", "SITE_C"]
-    record_source: Literal["ehr", "registry", "manual"]
+    id: Annotated[int, Field(gt=0, description="Positive record identifier.")]
+    name: Annotated[
+        str,
+        Field(
+            min_length=1,
+            max_length=25,
+            description="Fictional person name or pseudonym.",
+        ),
+    ]
+    site_code: Annotated[
+        Literal["SITE_A", "SITE_B", "SITE_C"],
+        Field(description="Fictional site identifier."),
+    ]
+    record_source: Annotated[
+        Literal["ehr", "registry", "manual"],
+        Field(description="Origin of the record within the fictional data flow."),
+    ]
 
 
 class DemographicsModel(BaseModel):
-    age: int = Field(..., ge=0, le=120)
-    sex: Literal["F", "M", "X"]
-    height_cm: float = Field(..., ge=50.0, le=250.0)
-    weight_kg: float = Field(..., ge=2.0, le=300.0)
+    age: Annotated[
+        int,
+        Field(ge=0, le=120, description="Age in completed years."),
+    ]
+    sex: Annotated[
+        Literal["F", "M", "X"],
+        Field(description="Administrative sex marker for the fictional subject."),
+    ]
+    height_cm: Annotated[
+        float,
+        Field(ge=50.0, le=250.0, description="Height in centimeters."),
+    ]
+    weight_kg: Annotated[
+        float,
+        Field(ge=2.0, le=300.0, description="Weight in kilograms."),
+    ]
 
 
 class EpisodeDatesModel(BaseModel):
-    start_date: date = Field(..., ge=date(1970, 1, 1), lt=date(2000, 1, 1))
-    end_date: date = Field(..., ge=date(1970, 1, 1), lt=date(2000, 1, 1))
-    admission_date: date = Field(..., ge=date(1970, 1, 1), lt=date(2000, 1, 1))
-    discharge_date: date = Field(..., ge=date(1970, 1, 1), lt=date(2000, 1, 1))
+    start_date: Annotated[
+        date,
+        Field(
+            ge=date(1970, 1, 1),
+            lt=date(2000, 1, 1),
+            description="Start date of the fictional observation period.",
+        ),
+    ]
+    end_date: Annotated[
+        date,
+        Field(
+            ge=date(1970, 1, 1),
+            lt=date(2000, 1, 1),
+            description="End date of the fictional observation period.",
+        ),
+    ]
+    admission_date: Annotated[
+        date,
+        Field(
+            ge=date(1970, 1, 1),
+            lt=date(2000, 1, 1),
+            description="Admission date for the fictional episode of care.",
+        ),
+    ]
+    discharge_date: Annotated[
+        date,
+        Field(
+            ge=date(1970, 1, 1),
+            lt=date(2000, 1, 1),
+            description="Discharge date for the fictional episode of care.",
+        ),
+    ]
 
     @model_validator(mode="after")
     def check_date_ranges(self):
@@ -38,13 +91,39 @@ class EpisodeDatesModel(BaseModel):
 
 
 class ClinicalOutcomeModel(BaseModel):
-    status: Literal["Yes", "No"] = Field(..., description="Boolean status")
-    smoker: Literal["Yes", "No"]
-    diagnosis_code: Literal["DX001", "DX002", "DX003", "DX004"]
-    symptom_score: int = Field(..., ge=0, le=10)
-    response_status: Literal["improved", "stable", "worsened"]
-    mortality_30d: Literal["Yes", "No"]
-
+    status: Annotated[
+        Literal["Yes", "No"],
+        Field(description="General binary status flag for the fictional record."),
+    ]
+    smoker: Annotated[
+        Literal["Yes", "No"],
+        Field(description="Whether the fictional subject is marked as a smoker."),
+    ]
+    diagnosis_code: Annotated[
+        Literal["DX001", "DX002", "DX003", "DX004"],
+        Field(description="Fictional diagnosis code."),
+    ]
+    symptom_score: Annotated[
+        int,
+        Field(ge=0, le=10, description="Symptom severity score on a 0-10 scale."),
+    ]
+    response_status: Annotated[
+        Literal["improved", "stable", "worsened"],
+        Field(description="Clinical response category at follow-up."),
+    ]
+    mortality_30d: Annotated[
+        Literal["Yes", "No"],
+        Field(description="Whether death occurred within 30 days."),
+    ]
+    mortality_60d: Annotated[
+        Literal["Yes", "No"],
+        Field(description="Whether death occurred within 60 days."),
+    ]
+    mortality_90d: Annotated[
+        Literal["Yes", "No"],
+        Field(description="Whether death occurred within 90 days."),
+    ]
+    
 
 class DemographicsClinicalOutcomeModel(
     DemographicsModel,
