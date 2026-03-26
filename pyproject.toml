@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "datavalgen-model-example"
-version = "0.2.2"
+version = "0.0.0"
 description = "Example of a data model and factory to use with datavalgen."
 readme = "README.md"
 requires-python = ">=3.13"
