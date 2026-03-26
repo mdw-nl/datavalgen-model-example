@@ -1,4 +1,4 @@
-FROM ghcr.io/mdw-nl/datavalgen:v0.3.0rc1
+FROM ghcr.io/mdw-nl/datavalgen:v0.3.0
 
 # default model and factory
 ENV DATAVALGEN_DISTRIBUTION=datavalgen-model-example
