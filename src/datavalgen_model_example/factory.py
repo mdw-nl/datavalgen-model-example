@@ -1,14 +1,14 @@
 from datetime import datetime
 from datavalgen.factory import BaseDataModelFactory
 from polyfactory.decorators import post_generated
-from .model import DataModel
+
+from .model import FullDataModel
 
 
 class DataModelFactory(BaseDataModelFactory):
     """Factory for generating example data model instances."""
 
-    __model__ = DataModel
-
+    __model__ = FullDataModel
 
     @post_generated
     @classmethod

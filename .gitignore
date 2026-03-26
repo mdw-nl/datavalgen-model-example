@@ -62,3 +62,11 @@ Thumbs.db
 
 # ---- Logs ----
 *.log
+
+# data
+data/
+*.csv
+
+# uv:
+# TODO: this should be commited, avoiding noise while in early dev releases
+uv.lock
