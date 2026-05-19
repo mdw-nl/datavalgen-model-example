@@ -9,7 +9,7 @@ description = "Example of a data model and factory to use with datavalgen."
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "datavalgen @ https://github.com/mdw-nl/datavalgen/archive/refs/tags/v0.3.0.tar.gz"
+    "datavalgen @ https://github.com/mdw-nl/datavalgen/archive/refs/tags/v0.4.3.tar.gz"
 ]
 
 [tool.uv.build-backend]
